@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        @font-face {
+            font-family: 'FunFont';
+            src: url('funfont.woff2') format('woff2'); /* Replace with actual font */
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'FunFont', Arial, sans-serif;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .stage {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5vw;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #stage1 { background: linear-gradient(to right, #ff7eb3, #ff758c); }
+        #stage2 { background: linear-gradient(to right, #ffdf7e, #ffaf7e); }
+        #stage3 { background: linear-gradient(to right, #7effa5, #7effdf); }
+        #stage4 { 
+            background: linear-gradient(to right, #7eafff, #7e7eff);
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .letter {
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            padding: 20px;
+            width: 60%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 2vw;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .collage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .collage img {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 5;
+        }
+
+        @media (max-width: 768px) {
+            .letter {
+                font-size: 3vw;
+                width: 80%;
+            }
+            .collage img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STAGES -->
+    <div class="stage" id="stage1">Hiiiiiiiiiiiii Zahan!</div>
+    <div class="stage hidden" id="stage2">I really wanted to tell you something...</div>
+    <div class="stage hidden" id="stage3">Happy Birthdayyyyyy! 🎉</div>
+    <div class="stage hidden" id="stage4">
+        <div class="letter">
+            Dear Zahan,  
+            <br><br>
+           You are one of the best fgreinds someone could have and 
+           we are greatful to have you with us.
+            <br><br>
+            **Happy Birthday! 🎂🎉**
+      <div class="collage" id="collage-container">
+    <!-- Placing images in corners and around the text -->
+    <img src="image1.jpg" style="top: 5%; left: 5%;">  <!-- Top-left corner -->
+    <img src="image2.jpg" style="top: 5%; right: 5%;">  <!-- Top-right corner -->
+    <img src="image3.jpg" style="bottom: 5%; left: 5%;">  <!-- Bottom-left corner -->
+    <img src="image4.jpg" style="bottom: 5%; right: 5%;">  <!-- Bottom-right corner -->
+    <img src="image5.jpg" style="top: 50%; left: 5%;">  <!-- Left side, center -->
+    <img src="image6.jpg" style="top: 50%; right: 5%;">  <!-- Right side, center -->
+    <img src="image7.jpg" style="top: 25%; left: 50%;">  <!-- Above text, centered -->
+    <img src="image8.jpg" style="bottom: 25%; left: 50%;">  <!-- Below text, centered -->
+</div>
+
+
+    <!-- MUSIC -->
+    <audio id="music1" src="music1.mp3"></audio>
+    <audio id="music2" src="music2.mp3"></audio>
+    <audio id="music3" src="music3.mp3"></audio>
+    <audio id="music4" src="music4.mp3"></audio>
+
+    <script>
+        let stageIndex = 0;
+        const stages = document.querySelectorAll('.stage');
+        const musicTracks = [
+            document.getElementById('music1'),
+            document.getElementById('music2'),
+            document.getElementById('music3'),
+            document.getElementById('music4')
+        ];
+
+        function changeStage() {
+            if (stageIndex > 0) {
+                stages[stageIndex - 1].classList.add('hidden');
+                musicTracks[stageIndex - 1].pause();
+            }
+
+            if (stageIndex === 0) {
+                stages[stageIndex].classList.remove('hidden');
+                musicTracks[stageIndex].play();
+                setTimeout(changeStage, 7000); // Stage 1 duration: 7 seconds
+            } else if (stageIndex === 1) {
+                stages[stageIndex].classList.remove('hidden');
+                musicTracks[stageIndex].play();
+                setTimeout(changeStage, 10000); // Stage 2 duration: 10 seconds
+            } else if (stageIndex < stages.length - 1) {
+                stages[stageIndex].classList.remove('hidden');
+                musicTracks[stageIndex].play();
+                setTimeout(changeStage, 5000);
+            } else if (stageIndex === stages.length - 1) {
+                stages[stageIndex].classList.remove('hidden');
+                musicTracks[stageIndex].play();
+            }
+
+            stageIndex++;
+        }
+
+        setTimeout(changeStage, 7000); // Initial delay for stage 1: 7 seconds
+    </script>
+
+</body>
+</html>
