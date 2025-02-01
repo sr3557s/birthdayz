@@ -138,21 +138,14 @@
                 musicTracks[stageIndex - 1].pause();
             }
 
-            if (stageIndex === 0) {
+            if (stageIndex < stages.length) {
                 stages[stageIndex].classList.remove('hidden');
+                musicTracks[stageIndex].currentTime = 0; // Reset the track to the beginning
                 musicTracks[stageIndex].play();
-                setTimeout(changeStage, 7000); // Stage 1 duration: 7 seconds
-            } else if (stageIndex === 1) {
-                stages[stageIndex].classList.remove('hidden');
-                musicTracks[stageIndex].play();
-                setTimeout(changeStage, 10000); // Stage 2 duration: 10 seconds
-            } else if (stageIndex < stages.length - 1) {
-                stages[stageIndex].classList.remove('hidden');
-                musicTracks[stageIndex].play();
-                setTimeout(changeStage, 5000);
-            } else if (stageIndex === stages.length - 1) {
-                stages[stageIndex].classList.remove('hidden');
-                musicTracks[stageIndex].play();
+                let duration = 5000; // Default duration
+                if (stageIndex === 0) duration = 7000; // Stage 1 duration: 7 seconds
+                if (stageIndex === 1) duration = 10000; // Stage 2 duration: 10 seconds
+                setTimeout(changeStage, duration);
             }
 
             stageIndex++;
